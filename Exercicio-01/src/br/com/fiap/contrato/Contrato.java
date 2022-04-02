@@ -6,12 +6,12 @@ import java.time.format.DateTimeFormatter;
 public class Contrato {
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    
+
 	private int numero;
 	private LocalDate data;
-	private double valorContrato;
-	private int numParcelas;
-	
+	private double valor;
+	private int parcelas;
+
 	public int getNumero() {
 		return numero;
 	}
@@ -24,53 +24,45 @@ public class Contrato {
 	public void setData(LocalDate data) {
 		this.data = data;
 	}
-	public double getValorParcela() {
-		return valorContrato;
+	public double getValor() {
+		return valor;
 	}
-	public void setValorParcela(double valorContrato) {
-		this.valorContrato = valorContrato;
+	public void setValor(double valor) {
+		this.valor = valor;
 	}
-	public int getNumParcelas() {
-		return numParcelas;
+	public int getParcelas() {
+		return parcelas;
 	}
-	public void setNumParcelas(int numParcelas) {
-		this.numParcelas = numParcelas;
+	public void setParcelas(int parcelas) {
+		this.parcelas = parcelas;
 	}
-	
-	public Contrato(int numero, LocalDate data, int valorContrato, int numParcelas) {
+
+
+	public Contrato(int numero, LocalDate data, double valor, int parcelas) {
 		super();
 		this.numero = numero;
 		this.data = data;
-		this.valorContrato = valorContrato;
-		this.numParcelas = numParcelas;
+		this.valor = valor;
+		this.parcelas = parcelas;
+
 	}
-	
+
 	public void parcelarValor() {
-		
-       
 
 		System.out.println("Parcelas:");
-		for(int i = 0; i < numParcelas; ++i){
+		for(int i = 0; i < parcelas; ++i){
 			LocalDate dataParcelas = data.plusMonths(i+1);
-			double valorParcelado =  ((valorContrato/numParcelas) * (i+1)/100 + (valorContrato/numParcelas)) * 1.02;
-			System.out.println(dataParcelas.format(formatter) + " - " + valorParcelado);
+			double valorParcelado =  ((valor/parcelas) * (i+1)/100 + (valor/parcelas)) * 1.02;
+			System.out.println(dataParcelas.format(formatter) + " - R$" + String.format("%.2f", valorParcelado));
+
 		} 
-		
-		
-		
 	}
-	
+
 	public void imprimirInformacoes() {
-		
 		System.out.println("Numero contrato: " + numero);
-		System.out.println("Data inicio contrato : " + data.format(formatter));
-		System.out.println("Montante a ser pago: R$" + valorContrato);
-		System.out.println("Numero de parcelas: " + numParcelas);
+		System.out.println("Data inicio contrato: " + data.format(formatter));
+		System.out.println("Montante a ser pago: R$" + valor);
+		System.out.println("Numero de parcelas: " + parcelas);
 
-		
 	}
-
-	
-	
-	
 }

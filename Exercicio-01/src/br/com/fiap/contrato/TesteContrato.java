@@ -1,29 +1,40 @@
 package br.com.fiap.contrato;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class TesteContrato {
 
 public static void main(String[] args) {
-		
-		LocalDate data = LocalDate.of(2018, 06, 25);
-		Contrato contrato = new Contrato(8000,data,6000,15);
-        Scanner scanner = new Scanner(System.in);
-        
-        while(true) {
-        	System.out.print("Qual o numero do contrato: ");
-            int numeroContrato = scanner.nextInt();
-			if (contrato.getNumero() == numeroContrato) {
-				contrato.imprimirInformacoes();
-				contrato.parcelarValor();
-			
-			} else if (numeroContrato == 0) {
-				break;
-			} else {
-		        System.out.println("Contrato n�o encontrado tente novamente. \n");
-			}
-			
-        }
-	}
+	
+	Scanner scanner = new Scanner(System.in);
+
+
+
+	System.out.print("Qual o numero do contrato: ");
+    int numeroContrato = scanner.nextInt();
+
+    System.out.print("Data dd/MM/yyy: ");
+	String dataContrato = scanner.next();
+
+	System.out.print("Valor do contrato: ");
+	double valorContrato = scanner.nextDouble();
+
+	System.out.print("Parcelas: ");
+    int parcelasContrato = scanner.nextInt();
+
+    scanner.close();
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    LocalDate dataContratoFormatada = LocalDate.parse(dataContrato, formatter);
+
+
+	Contrato contrato = new Contrato(numeroContrato,dataContratoFormatada,valorContrato,parcelasContrato);
+
+	contrato.imprimirInformacoes();
+	contrato.parcelarValor();			
+
+
+}
 }
